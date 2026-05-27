@@ -1,0 +1,45 @@
+# Specter-Net Configuration
+
+specter-net:
+  mode: enforce
+  log_level: info
+  event_buffer_size: 10000
+  correlation_window: 300
+
+monitors:
+  syscall:
+    enabled: true
+    eBPF: true
+  network:
+    enabled: true
+    interface: eth0
+    promiscuous: true
+  memory:
+    enabled: true
+    scan_interval: 60
+
+detectors:
+  injection:
+    enabled: true
+    min_confidence: 0.70
+  lateral_movement:
+    enabled: true
+    min_confidence: 0.75
+  c2_beacon:
+    enabled: true
+    min_samples: 8
+    max_jitter: 0.20
+  exfiltration:
+    enabled: true
+    large_transfer_mb: 50
+
+outputs:
+  phantom_veil:
+    enabled: true
+    endpoint: "localhost:9090"
+  cerebro:
+    enabled: true
+    endpoint: "localhost:9091"
+  obsidian_core:
+    enabled: true
+    endpoint: "localhost:8443"
