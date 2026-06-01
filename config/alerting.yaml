@@ -1,0 +1,11 @@
+# Alerting Configuration
+rules:
+  - name: critical-flood
+    severity: critical
+    cooldown: 300
+  - name: injection-burst
+    severity: critical
+    cooldown: 120
+handlers:
+  - type: slack
+    webhook: "${SLACK_WEBHOOK_URL}"
