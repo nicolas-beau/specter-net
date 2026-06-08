@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  specter-net:
+    build: .
+    container_name: specter-net
+    ports:
+      - "9091:9091"
+    volumes:
+      - ./config:/app/config
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    network_mode: host
+    restart: unless-stopped
