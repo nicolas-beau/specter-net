@@ -1,0 +1,1 @@
+{"rules":[{"name":"smb_lateral","severity":"high","condition":"unique_dst_hosts >= 3 AND dst_port IN [445, 139]","confidence":0.80},{"name":"dns_tunnel","severity":"high","condition":"subdomain_entropy > 4.0 AND subdomain_length > 30","confidence":0.75}]}

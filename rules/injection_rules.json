@@ -1,0 +1,1 @@
+{"rules":[{"name":"process_hollowing","severity":"critical","sequence":["NtUnmapViewOfSection","NtWriteVirtualMemory","NtResumeThread"],"confidence":0.95},{"name":"dll_injection","severity":"high","sequence":["OpenProcess","VirtualAllocEx","WriteProcessMemory","CreateRemoteThread"],"confidence":0.90}]}
