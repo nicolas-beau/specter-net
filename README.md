@@ -5,29 +5,24 @@
 
 Stealth threat detection and real-time monitoring for the Obsidian Labs security platform.
 
-## Detection Capabilities
+## What It Detects
 
-| Detector | What It Catches | Techniques |
-|----------|----------------|------------|
-| 🗡️ Injection | Process injection | Hollowing, DLL inject, reflective loading, APC |
-| 🔗 Lateral Movement | Network traversal | SMB, PSRemoting, WMI, RDP, SSH |
-| 📡 C2 Beacon | Command & control | Timing analysis, jitter detection |
-| 📤 Exfiltration | Data theft | Volume anomalies, large transfers |
-| 🧠 Memory Forensics | Fileless threats | RWX regions, memfd, rootkits |
+| Threat | Method | Confidence |
+|--------|--------|------------|
+| Process Injection | Syscall sequence analysis | 85-95% |
+| Lateral Movement | Network flow graph | 75-90% |
+| C2 Beacons | Timing analysis | 70-99% |
+| Data Exfiltration | Volume analysis | 75-85% |
+| Fileless Malware | Memory forensics | 85-90% |
+| DNS Tunneling | Entropy analysis | 70-80% |
 
-## Ecosystem Integration
+## Ecosystem
 
-```
-[specter-net] ──detect──→ [phantom-veil] ──quarantine──→ memory isolation
-      │                                                       │
-      └──telemetry──→ [cerebro] ──ML inference──→ [obsidian-core] ──policy──→ response
-```
-
-| Component | Role |
-|-----------|------|
-| [phantom-veil](https://github.com/nicolas-beau/phantom-veil) | Triggered quarantine on threat detection |
-| [cerebro](https://github.com/nicolas-beau/cerebro) | Receives telemetry for ML analysis |
-| [obsidian-labs](https://github.com/nicolas-beau/obsidian-labs) | Architecture & company docs |
+| Component | Integration |
+|-----------|-------------|
+| [obsidian-labs](https://github.com/nicolas-beau/obsidian-labs) | Company & architecture |
+| [phantom-veil](https://github.com/nicolas-beau/phantom-veil) | Threat-triggered quarantine |
+| [cerebro](https://github.com/nicolas-beau/cerebro) | ML analysis engine |
 | [ironclad](https://github.com/nicolas-beau/ironclad) | Secure deployment |
 
 ## Quick Start
@@ -39,11 +34,5 @@ pip install -r requirements.txt
 make test
 ```
 
-## Documentation
-
-- [API Reference](docs/api.md)
-- [Configuration](config/specter-net.yaml)
-
 ## License
-
-Apache 2.0 — See [LICENSE](LICENSE)
+Apache 2.0
