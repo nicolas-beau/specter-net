@@ -1,38 +1,34 @@
 # 👁️ Specter-Net
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-alpha-red.svg)]()
+
 Stealth threat detection and real-time monitoring for the Obsidian Labs security platform.
-
-## Overview
-
-Specter-Net provides kernel-level system introspection, network traffic analysis, and behavioral monitoring with minimal performance overhead. Detected threats are forwarded to [phantom-veil](https://github.com/nicolas-beau/phantom-veil) for automated containment and to [cerebro](https://github.com/nicolas-beau/cerebro) for ML-based analysis.
-
-## Architecture
-
-```
-[Kernel Probes] → [Event Buffer] → [Stream Processor] → [cerebro ML]
-                                                            ↓
-                                              [phantom-veil quarantine]
-                                                            ↓
-                                              [obsidian-core policy]
-```
 
 ## Detection Capabilities
 
-| Category | What We Detect | Method |
-|----------|---------------|--------|
-| Process Injection | DLL injection, process hollowing | Syscall pattern analysis |
-| Lateral Movement | SMB/PSRemoting/WMI abuse | Network flow anomalies |
-| Fileless Malware | memfd_create, reflective loading | Memory forensics |
-| C2 Communication | Beacon patterns, DNS tunneling | Timing analysis |
-| Privilege Escalation | Token manipulation, kernel exploits | Syscall monitoring |
+| Detector | What It Catches | Techniques |
+|----------|----------------|------------|
+| 🗡️ Injection | Process injection | Hollowing, DLL inject, reflective loading, APC |
+| 🔗 Lateral Movement | Network traversal | SMB, PSRemoting, WMI, RDP, SSH |
+| 📡 C2 Beacon | Command & control | Timing analysis, jitter detection |
+| 📤 Exfiltration | Data theft | Volume anomalies, large transfers |
+| 🧠 Memory Forensics | Fileless threats | RWX regions, memfd, rootkits |
 
-## Integration
+## Ecosystem Integration
+
+```
+[specter-net] ──detect──→ [phantom-veil] ──quarantine──→ memory isolation
+      │                                                       │
+      └──telemetry──→ [cerebro] ──ML inference──→ [obsidian-core] ──policy──→ response
+```
 
 | Component | Role |
 |-----------|------|
 | [phantom-veil](https://github.com/nicolas-beau/phantom-veil) | Triggered quarantine on threat detection |
-| [cerebro](https://github.com/nicolas-beau/cerebro) | Receives telemetry for ML inference |
+| [cerebro](https://github.com/nicolas-beau/cerebro) | Receives telemetry for ML analysis |
 | [obsidian-labs](https://github.com/nicolas-beau/obsidian-labs) | Architecture & company docs |
+| [ironclad](https://github.com/nicolas-beau/ironclad) | Secure deployment |
 
 ## Quick Start
 
@@ -40,8 +36,13 @@ Specter-Net provides kernel-level system introspection, network traffic analysis
 git clone https://github.com/nicolas-beau/specter-net.git
 cd specter-net
 pip install -r requirements.txt
-python -m specter_net.main --config config/specter-net.yaml
+make test
 ```
+
+## Documentation
+
+- [API Reference](docs/api.md)
+- [Configuration](config/specter-net.yaml)
 
 ## License
 
